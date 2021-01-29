@@ -1,39 +1,37 @@
 ﻿using System;
 using System.Linq;
 
-namespace ZigZagArrays
+namespace Test_Arrays
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int nRow = int.Parse(Console.ReadLine());  //We  read number
+            int nLines = int.Parse(Console.ReadLine());
+            int[] leftArr = new int[nLines];
+            int[] rightArr = new int[nLines];
 
-            int[] firstArr = new int[nRow];         // we create two int array ;
-            int[] secArr = new int[nRow];
-
-           
-
-            for (int i = 1; i <= nRow; i++)
+            for (int i = 1; i <= nLines; i++)
             {
-                string[] line = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray(); // we read form console the string , we remove the intervals
-                                                                        // We push strings into array of strings/
-                if (i % 2 != 0) // Odd Row
+                int[] numbers = Console.ReadLine()
+                    .Split()
+                    .Select(int.Parse)
+                    .ToArray();
+
+                if (i % 2 != 0)  //if we are on odd Row
                 {
-                    firstArr[i - 1] = int.Parse(line[line.Length - 2]);
-                    secArr[i - 1] = int.Parse(line[line.Length-1]);
+                    leftArr[i - 1] = numbers[0];
+                    rightArr[i - 1] = numbers[1];
                 }
-                else // if i % 2 == 0 -> Even Row;
+                else // if we are on even row .. i % 2 == 0
                 {
-                    firstArr[i - 1] = int.Parse(line[line.Length-1]);
-                    secArr[i - 1] = int.Parse(line[line.Length-2]);
+                    leftArr[i - 1] = numbers[1];
+                    rightArr[i - 1] = numbers[0];
                 }
             }
 
-            Console.WriteLine();
-            Console.WriteLine(string.Join(" ", firstArr));
-            Console.WriteLine();
-            Console.WriteLine(string.Join(" ", secArr));
+            Console.WriteLine(string.Join(" ", leftArr));
+            Console.WriteLine(string.Join(" ", rightArr));
         }
     }
 }
